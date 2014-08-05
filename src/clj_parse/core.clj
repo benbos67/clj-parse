@@ -1,6 +1,12 @@
-(ns clj-parse.core)
+(ns clj-parse.core
+  (:require [net.cgrand.enlive-html :as html]
+            [clojure.java.io :as io]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn parse-html
+  ""
+  [file elem]
+  (with-open [rdr (io/reader file)]
+    (map html/text
+         (html/select (html/html-resource rdr) [elem]))))
+
+(parse-html "/home/ben/test.txt" :h1)
