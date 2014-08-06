@@ -10,3 +10,6 @@
          (html/select (html/html-resource rdr) [elem]))))
 
 (parse-html "/home/ben/test.txt" :h1)
+
+(map html/text
+     (html/select (html/html-resource (io/file "/home/ben/test.txt")) [:h1]))
