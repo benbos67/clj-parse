@@ -1,6 +1,7 @@
 (ns clj-parse.core
   (:require [net.cgrand.enlive-html :as html]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as io])
+  (:gen-class :main true))
 
 (defn get-from-html
   "returns a lazy sequence containing the content of tag(s) elem in file f"
@@ -12,13 +13,18 @@
 
 (defn get-files
   ""
-  []
+  [dir]
   (filter #(not (.isDirectory %))
-          (file-seq (clojure.java.io/file "."))))
+          (file-seq (clojure.java.io/file dir))))
 
-(defn main
+(defn -main
   ""
-  []
-  (filter #(not-empty %)
-          (map #(get-from-html (html/html-resource %) :h1)
-               (get-files))))
+  [& args]
+  (for [res (map #(html/html-resource %) (get-files (first args)))
+        :when (.contains (str (first (get-from-html res :h1)) "") "Clojure")]
+    (first (get-from-html res :h1))))
+
+(defn -main1
+  [& args]
+  (doseq [res (map #(html/html-resource %) (get-files (first args)))]
+    (println res)))
