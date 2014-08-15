@@ -20,11 +20,7 @@
 (defn -main
   ""
   [& args]
-  (for [res (map #(html/html-resource %) (get-files (first args)))
+  (doseq [res (map #(html/html-resource %) (get-files (first args)))
         :when (.contains (str (first (get-from-html res :h1)) "") "Clojure")]
-    (first (get-from-html res :h1))))
+    (println (first (get-from-html res :h1)))))
 
-(defn -main1
-  [& args]
-  (doseq [res (map #(html/html-resource %) (get-files (first args)))]
-    (println res)))
