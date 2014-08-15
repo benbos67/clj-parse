@@ -1,6 +1,7 @@
 (ns clj-parse.core
   (:require [net.cgrand.enlive-html :as html]
             [clojure.java.io :as io]
+            [clojure.string :refer [upper-case]]
             [pantomime.mime :refer [mime-type-of]])
   (:gen-class :main true))
 
@@ -22,6 +23,6 @@
   ""
   [& args]
   (doseq [res (map #(html/html-resource %) (get-html-files (first args)))
-        :when (.contains (str (first (get-from-html res :h1)) "") "Clojure")]
-    (println (first (get-from-html res :h1)))))
+        :when (.contains (upper-case (str (first (get-from-html res :h6)) "")) "RETURN")]
+    (println (first (get-from-html res :h6)))))
 
