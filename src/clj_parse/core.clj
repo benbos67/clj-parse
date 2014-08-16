@@ -6,17 +6,16 @@
   (:gen-class :main true))
 
 (defn get-from-html
-  "returns a lazy sequence containing the content of tag(s) elem in file f"
+  "returns a lazy sequence containing the content of tags elem in file f"
   [res elem]
   (map html/text
        (html/select res [elem])))
 
 (defn get-html-files
-  "returns a sequence of file objects from directory dir"
+  "returns a sequence of html files from directory dir, recursive"
   [dir]
-  (filter #(or
-            (= (mime-type-of %) "application/xhtml+xml")
-            (= (mime-type-of %) "text/html"))
+  (filter #(contains? #{"application/xhtml+xml" "text/html"}
+                      (mime-type-of %))
           (file-seq (clojure.java.io/file dir))))
 
 (defn -main
