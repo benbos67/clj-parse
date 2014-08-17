@@ -5,12 +5,6 @@
             [pantomime.mime :refer [mime-type-of]])
   (:gen-class :main true))
 
-(defn get-from-html
-  "returns a lazy sequence containing the content of tags elem in file f"
-  [res elem]
-  (map html/text
-       (html/select res [elem])))
-
 (defn get-html-files
   "returns a sequence of html files from directory dir, recursive"
   [dir]
@@ -22,6 +16,8 @@
   ""
   [& args]
   (doseq [res (map #(html/html-resource %) (get-html-files (first args)))
-        :when (.contains (upper-case (str (first (get-from-html res :h6)) "")) "RETURN")]
-    (println (first (get-from-html res :h6)))))
+          :when (.contains
+                 (upper-case (str (html/text (first (html/select res [:h6]))) ""))
+                 "RETURN")]
+    (println (html/text (first (html/select res [:h6]))))))
 
