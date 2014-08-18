@@ -1,0 +1,163 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-au">
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="Generator" CONTENT="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta NAME="Template" 
+CONTENT="C:\Program Files\Microsoft Office\Office\html.dot">
+<title>AC_BAL</title>
+<link rel="stylesheet" type="text/css" href="acurity.css">
+</head>
+
+<body>
+
+<h2>AC_BAL</h2>
+<hr>
+<p>This function returns the balances of any combination of General Ledger 
+Accounts, at up to three separate dates.</p>
+<h4>Syntax</h4>
+<h6>RETURN = 
+AC_BAL(REF1,REF2,REF3,REF4,REF5,REF6,REF7,REF8,REF9,REF10,REF11,VAR1,VAR2,VAR3,VAR4,VAR5,VAR6)</h6>
+<table width="100%">
+  <tr>
+    <td width="10%"><b>REF1</b></td>
+    <td width="10%"><b>STRING</b></td>
+    <td width="80%" colspan="2">&quot;Y&quot; for Year-to-date balances.<br>
+    &quot;N&quot; for All-time-totals.</td>
+  </tr>
+  <tr>
+    <td width="10%"><b>REF2</b></td>
+    <td width="10%"><b>DATE</b></td>
+    <td width="43%">Earliest of the 3 dates a balance is required on.</td>
+    <td width="36%" rowspan="3"><font color="#800080"><b>Note<br>
+    </b>All three dates can be identical if only one balance is required.<br>
+    Do not put extra dates if you do not need to as this will cause extra reads.</font></td>
+  </tr>
+  <tr>
+    <td width="10%"><b>REF3</b></td>
+    <td width="10%"><b>DATE</b></td>
+    <td width="43%">Next of the 3 dates a balance is required on.</td>
+  </tr>
+  <tr>
+    <td width="10%"><b>REF4</b></td>
+    <td width="10%"><b>DATE</b></td>
+    <td width="43%">Latest of the 3 dates a balance is required on.</td>
+  </tr>
+  <tr>
+    <td width="10%"><b>REF5</b></td>
+    <td width="10%"><b>STRING</b></td>
+    <td width="80%" colspan="2">Fund Code **</td>
+  </tr>
+  <tr>
+    <td width="10%"><b>REF6</b></td>
+    <td width="10%"><b>STRING</b></td>
+    <td width="80%" colspan="2">Member Number **</td>
+  </tr>
+  <tr>
+    <td width="10%"><b>REF7</b></td>
+    <td width="10%"><b>STRING</b></td>
+    <td width="80%" colspan="2">Contribution Account **</td>
+  </tr>
+  <tr>
+    <td width="10%"><b>REF8</b></td>
+    <td width="10%"><b>STRING</b></td>
+    <td width="80%" colspan="2">Preserved flag **</td>
+  </tr>
+  <tr>
+    <td width="10%"><b>REF9</b></td>
+    <td width="10%"><b>STRING</b></td>
+    <td width="80%" colspan="2">Ledger Account **</td>
+  </tr>
+  <tr>
+    <td width="10%"><b>REF10</b></td>
+    <td width="10%"><b>STRING</b></td>
+    <td width="80%" colspan="2">Ledger Sub Account **</td>
+  </tr>
+  <tr>
+    <td width="10%"><b>REF11</b></td>
+    <td width="10%"><b>STRING</b></td>
+    <td width="80%" colspan="2">Ledger Sub-sub Account **</td>
+  </tr>
+  <tr>
+    <td width="10%"><b>VAR1</b></td>
+    <td width="10%"><b>DOUBLE</b></td>
+    <td width="43%">Cash balance on or prior to date1</td>
+    <td width="36%" rowspan="3">
+	<font color="#800080">Use a different local variable for each of the Cash 
+	and Unit balance values. If the same variable is passed in multiple times, 
+	the resultant value will be the sum of the values for each date. E.g. If the 
+	3 dates are the same then 3 times the expected balance. </font></td>
+  </tr>
+	<tr>
+    <td width="10%"><b>VAR2</b></td>
+    <td width="10%"><b>DOUBLE</b></td>
+    <td width="43%">Cash balance on or prior to date2</td>
+  </tr>
+	<tr>
+    <td width="10%"><b>VAR3</b></td>
+    <td width="10%"><b>DOUBLE</b></td>
+    <td width="43%">Cash balance on or prior to date3</td>
+  </tr>
+  <tr>
+    <td width="10%"><b>VAR4</b></td>
+    <td width="10%"><b>DOUBLE</b></td>
+    <td width="80%" colspan="2">Unit balance on or prior to date1</td>
+  </tr>
+  <tr>
+    <td width="10%"><b>VAR5</b></td>
+    <td width="10%"><b>DOUBLE</b></td>
+    <td width="80%" colspan="2">Unit balance on or prior to date2</td>
+  </tr>
+  <tr>
+    <td width="10%"><b>VAR6</b></td>
+    <td width="10%"><b>DOUBLE</b></td>
+    <td width="80%" colspan="2">Unit balance on or prior to date3</td>
+  </tr>
+  <tr>
+    <td width="10%"><b>RETURN</b></td>
+    <td width="10%"><b>SHORT</b></td>
+    <td width="80%" colspan="2">Status<p class="Nindent9"><b>0</b> = Successful call of the function.</p>
+	</td>
+  </tr>
+</table>
+<p>** These fields can take special values as detailed below :</p>
+<p><b>Blank<br>
+</b>All possible values for this field will be summed.<b><br>
+Asterisks<br>
+</b>Only accounts with asterisks for this field will be summed (equivalent to 
+unallocated).<b><br>
+Plus signs<br>
+</b>Only accounts which do not have asterisks in this field will be summed 
+(equivalent to allocated only).<b><br>
+Partial<br>
+</b>If the field is only partially completed then the function will total all 
+accounts matching the field part supplied.</p>
+<h5>Example 1</h5>
+<p><font color="#800000">#VAR status : SHORT <br>
+#VAR amt1, amt2, amt3, unit1, unit2, unit3 : DOUBLE <br>
+#SET status = AC_BAL (&quot;N&quot;,hRLd_End,hRLd_End,hRLd_End,hRLz_Fund,&quot; &quot;,&quot;**&quot;, &quot;*&quot;, 
+&quot;A03&quot;, &quot; &quot;, &quot; &quot;, amt1, amt2, amt3, unit1, unit2, unit3) </font><br>
+<br>
+Total Investment Amount = @FORMAT(&quot;$CF.2&quot;,amt1)@<br>
+Total Units = @FORMAT(&quot;CF.6&quot;,unit1)@<br>
+<br>
+This call calculates the total investments, using all-time-totals, for the Fund 
+entered on the Reports screen, as at the End Date entered on the Reports screen.</p>
+<h5>Example 2</h5>
+<p><font color="#800000">#VAR status : SHORT <br>
+#VAR amt1, amt2, amt3, unit1, unit2, unit3 : DOUBLE <br>
+#SET status = AC_BAL (&quot;N&quot;,hRLd_End,hRLd_End,hRLd_End,hRLz_Fund,&quot; &quot;,&quot;**&quot;, &quot;*&quot;, 
+&quot;A03&quot;, &quot; &quot;, hRLz_Investment_Mgr, amt1, amt2, amt3, unit1, unit2, unit3) <br>
+<br>
+Total Investment Amount = @FORMAT(&quot;$CF.2&quot;,amt1)@<br>
+Total Units = @FORMAT(&quot;BCF.6&quot;,unit1)@<br>
+</font><br>
+This call calculates the all-time-total investment held by the Fund with the 
+Investment Manager entered on the Reports screen, as at the End Date entered on 
+the Reports screen.</p>
+
+</body>
+
+</html>
