@@ -8,9 +8,10 @@
 (defn get-html-files
   "returns a sequence of html files from directory dir, recursive"
   [dir]
-  (filter #(contains? #{"application/xhtml+xml" "text/html"}
-                      (mime-type-of %))
-          (file-seq (clojure.java.io/file dir))))
+  (filter #(contains?
+            #{"application/xhtml+xml" "text/html"}
+            (mime-type-of %))
+          (file-seq (io/file dir))))
 
 (defn -main
   ""
