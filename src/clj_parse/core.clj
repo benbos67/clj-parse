@@ -20,6 +20,6 @@
           :when (.contains
                  (upper-case (str (html/text (first (html/select res [:h6]))) ""))
                  "RETURN")]
-    (println (str (html/text (first (html/select res [:h6])))
-                  (html/text (first (html/select res [:table])))))))
+    (println (str (html/text (first (html/select res [:h2])))
+                  (map #(html/text %) (butlast (html/select res [:tr])))))))
 
