@@ -21,5 +21,5 @@
                  (upper-case (str (html/text (first (html/select res [:h6]))) ""))
                  "RETURN")]
     (println (str (html/text (first (html/select res [:h6])))
-                  (html/text (first (html/select res [:table])))))))
+                  (html/text (html/select res [:table :tr]))))))
 
