@@ -21,5 +21,5 @@
                  (upper-case (str (html/text (first (html/select res [:h6]))) ""))
                  "RETURN")]
     (println (str (html/text (first (html/select res [:h2])))
-                  (html/text (html/select res [:td :b]))))))
+                  (map #(html/text %) (butlast (html/select res [:tr])))))))
 
