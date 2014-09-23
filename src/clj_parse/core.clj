@@ -5,13 +5,19 @@
             [pantomime.mime :refer [mime-type-of]])
   (:gen-class :main true))
 
-(html/deftemplate t1 "clj_parse/template.html"
+(html/deftemplate auto-complete-xml "clj_parse/auto-complete-xml.html"
   [keyword return-type description params]
   [:KeyWord] (html/set-attr :name keyword))
 
-(html/defsnippet s1 "clj_parse/template.html"
+(html/defsnippet keyword "clj_parse/keyword.html"
   [:KeyWord]
-  [keyword return-type description params]
+  [keyword params]
+  [:KeyWord] (html/set-attr :name keyword)
+  [:Overload] (html/set-attr :retval return-type :descr description))
+
+(html/defsnippet param "clj_parse/param.html"
+  [:KeyWord]
+  [keyword params]
   [:KeyWord] (html/set-attr :name keyword)
   [:Overload] (html/set-attr :retval return-type :descr description))
 
