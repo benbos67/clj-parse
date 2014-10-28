@@ -11,15 +11,16 @@
 
 (html/defsnippet keyword "clj_parse/keyword.html"
   [:KeyWord]
-  [keyword params]
-  [:KeyWord] (html/set-attr :name keyword)
-  [:Overload] (html/set-attr :retval return-type :descr description))
+  [{keyword :keyword return-type :return-type description :description}]
+  [:KeyWord] (html/do->
+              (html/set-attr :name keyword)
+              (html/set-attr :retVal return-type)
+	      (html/set-attr :descr description)))
 
 (html/defsnippet param "clj_parse/param.html"
-  [:KeyWord]
-  [keyword params]
-  [:KeyWord] (html/set-attr :name keyword)
-  [:Overload] (html/set-attr :retval return-type :descr description))
+  [:Param]
+  [{val :val}]
+  [:name] (html/set-attr :name val))
 
 (defn get-html-files
   "returns a sequence of html files from directory dir, recursive"

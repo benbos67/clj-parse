@@ -5,9 +5,19 @@
             [pantomime.mime :refer [mime-type-of]])
   (:gen-class :main true))
 
-(html/deftemplate t1 "clj_parse/template.html" [keyword return-type description params]
-  [:KeyWord] (html/set-attr :name keyword :retval return-type)
-  [:Overload] (html/set-attr :descr description))
+(html/deftemplate auto-complete-xml "clj_parse/auto-complete-xml.html"
+  [keyword return-type description params]
+  [:KeyWord] (html/set-attr :name keyword))
+
+;;(html/defsnippet keyword "clj_parse/keyword.html"
+;;  [:KeyWord]
+;;  [keyword return-type description]
+;;  [:KeyWord] (html/set-attr :name keyword))
+
+;;(html/defsnippet param "clj_parse/param.html"
+;;  [:Param]
+;;  [val]
+;;  [:name] (html/set-attr :name val))
 
 (defn get-html-files
   "returns a sequence of html files from directory dir, recursive"
