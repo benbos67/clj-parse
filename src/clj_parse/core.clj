@@ -9,15 +9,15 @@
   [keyword return-type description params]
   [:KeyWord] (html/set-attr :name keyword))
 
-(html/defsnippet keyword "clj_parse/keyword.html"
-  [:KeyWord]
+(html/defsnippet keyword-snippet "clj_parse/keyword.html"
+  [:xml]
   [{keyword :keyword return-type :return-type description :description}]
-  [:KeyWord] (html/do->
-              (html/set-attr :name keyword)
-              (html/set-attr :retVal return-type)
-	      (html/set-attr :descr description)))
+  [:KeyWord] (html/set-attr :name keyword)
+  [:KeyWord :Overload] (html/do->
+                        (html/set-attr :retVal return-type)
+                        (html/set-attr :descr description)))
 
-(html/defsnippet param "clj_parse/param.html"
+(html/defsnippet param-snipppet "clj_parse/param.html"
   [:Param]
   [{val :val}]
   [:name] (html/set-attr :name val))
