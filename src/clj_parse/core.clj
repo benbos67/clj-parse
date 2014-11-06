@@ -17,7 +17,7 @@
                         (html/set-attr :retVal return-type)
                         (html/set-attr :descr description)))
 
-(html/defsnippet param-snipppet "clj_parse/param.html"
+(html/defsnippet param-snippet "clj_parse/param.html"
   [:Param]
   [{val :val}]
   [:name] (html/set-attr :name val))
