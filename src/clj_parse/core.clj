@@ -10,8 +10,8 @@
   [:KeyWord] (html/set-attr :name keyword))
 
 (html/defsnippet keyword-snippet "keyword.html"
-  {[:KeyWord] [[:Param]]}
-  [{keyword :keyword return-type :return-type description :description val :val}]
+  [[:KeyWord] [:Param]]
+  [keyword return-type description val]
   [:KeyWord] (html/set-attr :name keyword)
   [:KeyWord :Overload] (html/do->
                         (html/set-attr :retVal return-type)
